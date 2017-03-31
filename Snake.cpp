@@ -125,8 +125,16 @@ void Snake::init()
 
 void Snake::spawnFood()
 {
-    food.x = generateRandomNumber();
-    food.y = generateRandomNumber();
+    bool ok = false;
+    while (!ok) 
+    {
+        food.x = generateRandomNumber();
+        food.y = generateRandomNumber();
+        if (food.x != player.x && food.y != player.y)
+        {
+            ok = true;
+        }
+    }
 }
 
 void Snake::setupPlayer()
