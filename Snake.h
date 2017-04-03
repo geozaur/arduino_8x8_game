@@ -47,11 +47,15 @@ class Snake
     virtual int drawFoodPart(int x, int y) = 0;
 
     // handler for delay between updates
-    virtual void delayBetweenUpdates() = 0;
+    virtual void delayBetweenUpdates(int difficulty = 0) = 0;
+
+    // getter for difficulty
+    int getDifficulty() { return difficulty; }
 
   private:
-    // game state variable
+    // game variables
     bool playing;
+    int difficulty = 0;
 
     // food object
     Food food;

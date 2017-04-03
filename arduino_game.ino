@@ -36,9 +36,9 @@ public:
     lc.setLed(0, x, y, true);
   }
 
-  void delayBetweenUpdates()
+  void delayBetweenUpdates(int difficulty)
   {
-    delay(350);
+    delay(350 - difficulty);
   }
 } game;
 
@@ -119,6 +119,6 @@ void loop()
     lc.clearDisplay(0);
     game.render();
     game.update();
-    game.delayBetweenUpdates();
+    game.delayBetweenUpdates(game.getDifficulty());
   }
 }

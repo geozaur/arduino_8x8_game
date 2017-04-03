@@ -22,6 +22,9 @@ void Snake::grow()
     player[length].x = food.x;
     player[length].y = food.y;
     length++;
+
+    // game becomes more difficult
+    difficulty += 5;
 }
 
 bool Snake::playerAteFood()
@@ -130,7 +133,7 @@ void Snake::spawnFood()
     {
         food.x = generateRandomNumber();
         food.y = generateRandomNumber();
-        if (food.x != player.x && food.y != player.y)
+        if (food.x != player[0].x && food.y != player[0].y)
         {
             ok = true;
         }
