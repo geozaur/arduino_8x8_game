@@ -12,7 +12,7 @@ void setupLedControl()
 {
   // the zero refers to the MAX7219 number, it is zero for 1 chip
   lc.shutdown(0, false); // turn off power saving, enables display
-  lc.setIntensity(0, 8); // sets brightness (0~15 possible values)
+  lc.setIntensity(0, 4); // sets brightness (0~15 possible values)
   lc.clearDisplay(0);    // clear screen
 }
 
@@ -39,6 +39,17 @@ public:
   void delayBetweenUpdates(int difficulty)
   {
     delay(350 - difficulty);
+  }
+
+  void gameOverDisplay()
+  {
+    const int SCORE = getScore();
+
+    // display blinking screen
+
+
+    // display score
+
   }
 } game;
 
@@ -101,6 +112,21 @@ void handleInput()
   checkDownMotion();
 }
 
+// this function restarts the game after receiving input
+void awaitForInput() 
+{
+  x = analogRead(joystickX);
+  y = analogRead(joystickY);
+  
+  if (x > UP_THRESH ||
+      x < DOWN_THRESH ||
+      y < RIGHT_THRESH ||
+      y > LEFT_THRESH)
+  {
+    game.init();
+  }
+}
+
 /* Arduino code */
 
 void setup()
@@ -120,5 +146,11 @@ void loop()
     game.render();
     game.update();
     game.delayBetweenUpdates(game.getDifficulty());
+  } 
+  else 
+  {
+    game.over();
+    awaitForInput();
+    delay(250);
   }
 }

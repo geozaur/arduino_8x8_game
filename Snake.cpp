@@ -153,3 +153,13 @@ void Snake::setupPlayer()
         player[i].y = 0;
     }
 }
+
+void Snake::over()
+{
+    gameOverDisplay();
+
+    // reinit
+    direction = -1;    
+    length = 1;
+    difficulty = 0;
+}

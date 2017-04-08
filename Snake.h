@@ -36,6 +36,13 @@ class Snake
     void update();
     void render();
     bool isPlaying() { return playing; }
+    void over();
+
+    // getter for difficulty
+    int getDifficulty() { return difficulty; }
+
+    // getter for score
+    int getScore() { return length; }
 
     // handler for generating random positions
     virtual int generateRandomNumber() = 0;
@@ -49,8 +56,8 @@ class Snake
     // handler for delay between updates
     virtual void delayBetweenUpdates(int difficulty = 0) = 0;
 
-    // getter for difficulty
-    int getDifficulty() { return difficulty; }
+    // handler for end game
+    virtual void gameOverDisplay() = 0;
 
   private:
     // game variables
@@ -79,4 +86,5 @@ class Snake
     // render functions
     void drawFood();
     void drawPlayer();
+    
 };
