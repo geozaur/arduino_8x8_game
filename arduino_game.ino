@@ -16,6 +16,168 @@ void setupLedControl()
   lc.clearDisplay(0);    // clear screen
 }
 
+/* Utility function for printing digits using lc */
+void printDigit(int digit, int offset)
+{
+  int ox = 1 + (offset > 0 ? 3 : 0);
+  int oy = 1;
+
+  switch (digit)
+  {
+    case 0:
+      lc.setLed(0, ox, oy, true);
+      lc.setLed(0, ox, oy+1, true);
+      lc.setLed(0, ox, oy+2, true);
+      lc.setLed(0, ox, oy+3, true);
+      lc.setLed(0, ox, oy+4, true);
+
+      lc.setLed(0, ox+1, oy, true);
+      lc.setLed(0, ox+1, oy+4, true);
+
+      lc.setLed(0, ox+2, oy, true);
+      lc.setLed(0, ox+2, oy+1, true);
+      lc.setLed(0, ox+2, oy+2, true);
+      lc.setLed(0, ox+2, oy+3, true);
+      lc.setLed(0, ox+2, oy+4, true);
+      break;
+
+    case 1:
+      lc.setLed(0, ox+2, oy, true);
+      lc.setLed(0, ox+2, oy+1, true);
+      lc.setLed(0, ox+2, oy+2, true);
+      lc.setLed(0, ox+2, oy+3, true);
+      lc.setLed(0, ox+2, oy+4, true);
+      break;
+
+    case 2:
+      lc.setLed(0, ox, oy, true);
+      lc.setLed(0, ox, oy+1, true);
+      lc.setLed(0, ox, oy+2, true);
+      lc.setLed(0, ox, oy+4, true);
+
+      lc.setLed(0, ox+1, oy, true);
+      lc.setLed(0, ox+1, oy+2, true);
+      lc.setLed(0, ox+1, oy+4, true);
+
+      lc.setLed(0, ox+2, oy, true);
+      lc.setLed(0, ox+2, oy+2, true);
+      lc.setLed(0, ox+2, oy+3, true);
+      lc.setLed(0, ox+2, oy+4, true);
+      break;
+
+    case 3:
+      lc.setLed(0, ox, oy, true);
+      lc.setLed(0, ox, oy+2, true);
+      lc.setLed(0, ox, oy+4, true);
+
+      lc.setLed(0, ox+1, oy, true);
+      lc.setLed(0, ox+1, oy+2, true);
+      lc.setLed(0, ox+1, oy+4, true);
+
+      lc.setLed(0, ox+2, oy, true);
+      lc.setLed(0, ox+2, oy+1, true);
+      lc.setLed(0, ox+2, oy+2, true);
+      lc.setLed(0, ox+2, oy+3, true);
+      lc.setLed(0, ox+2, oy+4, true);
+      break;
+
+    case 4:
+      lc.setLed(0, ox, oy+2, true);
+      lc.setLed(0, ox, oy+3, true);
+      lc.setLed(0, ox, oy+4, true);
+
+      lc.setLed(0, ox+1, oy+2, true);
+
+      lc.setLed(0, ox+2, oy, true);
+      lc.setLed(0, ox+2, oy+1, true);
+      lc.setLed(0, ox+2, oy+2, true);
+      lc.setLed(0, ox+2, oy+3, true);
+      lc.setLed(0, ox+2, oy+4, true);
+      break;
+
+    case 5:
+      lc.setLed(0, ox, oy, true);
+      lc.setLed(0, ox, oy+2, true);
+      lc.setLed(0, ox, oy+3, true);
+      lc.setLed(0, ox, oy+4, true);
+
+      lc.setLed(0, ox+1, oy, true);
+      lc.setLed(0, ox+1, oy+2, true);
+      lc.setLed(0, ox+1, oy+4, true);
+
+      lc.setLed(0, ox+2, oy, true);
+      lc.setLed(0, ox+2, oy+1, true);
+      lc.setLed(0, ox+2, oy+2, true);
+      lc.setLed(0, ox+2, oy+4, true);
+      break;
+
+    case 6:
+      lc.setLed(0, ox, oy, true);
+      lc.setLed(0, ox, oy+1, true);
+      lc.setLed(0, ox, oy+2, true);
+      lc.setLed(0, ox, oy+3, true);
+      lc.setLed(0, ox, oy+4, true);
+
+      lc.setLed(0, ox+1, oy, true);
+      lc.setLed(0, ox+1, oy+2, true);
+      lc.setLed(0, ox+1, oy+4, true);
+
+      lc.setLed(0, ox+2, oy, true);
+      lc.setLed(0, ox+2, oy+1, true);
+      lc.setLed(0, ox+2, oy+2, true);
+      lc.setLed(0, ox+2, oy+4, true);
+      break;
+
+    case 7:
+      lc.setLed(0, ox, oy+4, true);
+
+      lc.setLed(0, ox+1, oy+4, true);
+
+      lc.setLed(0, ox+2, oy, true);
+      lc.setLed(0, ox+2, oy+1, true);
+      lc.setLed(0, ox+2, oy+2, true);
+      lc.setLed(0, ox+2, oy+3, true);
+      lc.setLed(0, ox+2, oy+4, true);
+      break;
+
+    case 8:
+      lc.setLed(0, ox, oy, true);
+      lc.setLed(0, ox, oy+1, true);
+      lc.setLed(0, ox, oy+2, true);
+      lc.setLed(0, ox, oy+3, true);
+      lc.setLed(0, ox, oy+4, true);
+
+      lc.setLed(0, ox+1, oy, true);
+      lc.setLed(0, ox+1, oy+2, true);
+      lc.setLed(0, ox+1, oy+4, true);
+
+      lc.setLed(0, ox+2, oy, true);
+      lc.setLed(0, ox+2, oy+1, true);
+      lc.setLed(0, ox+2, oy+2, true);
+      lc.setLed(0, ox+2, oy+3, true);
+      lc.setLed(0, ox+2, oy+4, true);
+      break;
+
+    case 9:
+      lc.setLed(0, ox, oy, true);
+      lc.setLed(0, ox, oy+2, true);
+      lc.setLed(0, ox, oy+3, true);
+      lc.setLed(0, ox, oy+4, true);
+
+      lc.setLed(0, ox+1, oy, true);
+      lc.setLed(0, ox+1, oy+2, true);
+      lc.setLed(0, ox+1, oy+4, true);
+
+      lc.setLed(0, ox+2, oy, true);
+      lc.setLed(0, ox+2, oy+1, true);
+      lc.setLed(0, ox+2, oy+2, true);
+      lc.setLed(0, ox+2, oy+3, true);
+      lc.setLed(0, ox+2, oy+4, true);
+      break;
+
+  }
+}
+
 /* Game Class Setup */
 
 class Game : public Snake
@@ -43,12 +205,30 @@ public:
 
   void gameOverDisplay()
   {
-    const int SCORE = getScore();
+    int score = getScore();
 
-    // display blinking screen
+    lc.clearDisplay(0);
 
+    // display game over animation
+    
+    for (int i = 0; i < 8; i++)
+    {
+      for (int j = 7; j >= 0; j--)
+      {
+        lc.setLed(0, j, i, true);
+      }
+      delay(150);
+    }
+    
 
+    lc.clearDisplay(0);
+
+    
     // display score
+
+    printDigit(score / 10, 0);
+    printDigit(score % 10, 1);
+
 
   }
 } game;
@@ -138,7 +318,7 @@ void setup()
 }
 
 void loop()
-{
+{ 
   if (game.isPlaying())
   {
     handleInput(); 
@@ -147,10 +327,14 @@ void loop()
     game.update();
     game.delayBetweenUpdates(game.getDifficulty());
   } 
-  else 
+  else if (game.isFinished())
   {
     game.over();
-    awaitForInput();
     delay(250);
+  } 
+  else
+  {
+    awaitForInput();
+    delay(150);
   }
 }

@@ -7,11 +7,17 @@ void Snake::update()
     if (playerCrashed())
     {
         playing = false;
+        finished = true;
     }
 
     if (playerAteFood())
     {
+        spawnFood();
         grow();
+    }
+
+    if (movesUntilRespawn == 0)
+    {
         spawnFood();
     }
 }
@@ -24,7 +30,7 @@ void Snake::grow()
     length++;
 
     // game becomes more difficult
-    difficulty += 5;
+    difficulty += DIFFICULTY_BIT;
 }
 
 bool Snake::playerAteFood()
@@ -70,6 +76,8 @@ void Snake::movePlayer()
         moveParts(0, 1);
         break;
     }
+
+    movesUntilRespawn -= 1;
 }
 
 void Snake::moveParts(int xAmount, int yAmount)
@@ -124,12 +132,13 @@ void Snake::init()
     setupPlayer();
     spawnFood();
     playing = true;
+    finished = false;
 }
 
 void Snake::spawnFood()
 {
     bool ok = false;
-    while (!ok) 
+    while (!ok)
     {
         food.x = generateRandomNumber();
         food.y = generateRandomNumber();
@@ -137,6 +146,42 @@ void Snake::spawnFood()
         {
             ok = true;
         }
+    }
+
+    if (difficulty > DIFFICULTY_THRESH)
+    {
+        // now food will respawn if the player doesn't eat it
+        // in the least amount of moves
+
+        int minx, maxx;
+        int miny, maxy;
+
+        // compute movesUntilRespawn
+
+        if (player[0].x < food.x)
+        {
+            minx = player[0].x;
+            maxx = food.x;
+        }
+        else
+        {
+            minx = food.x;
+            maxx = player[0].x;
+        }
+
+        if (player[0].y < food.y)
+        {
+            miny = player[0].y;
+            maxy = food.y;
+        }
+        else
+        {
+            miny = food.y;
+            maxy = player[0].y;
+        }
+
+        movesUntilRespawn = (((maxx - minx) < (minx + BOARD_SIZE - maxx)) ? (maxx - minx) : (minx + BOARD_SIZE - maxx)) +
+                            (((maxy - miny) < (miny + BOARD_SIZE - maxy)) ? (maxy - miny) : (miny + BOARD_SIZE - maxy));
     }
 }
 
@@ -159,7 +204,8 @@ void Snake::over()
     gameOverDisplay();
 
     // reinit
-    direction = -1;    
+    direction = -1;
     length = 1;
     difficulty = 0;
+    finished = false;
 }

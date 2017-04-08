@@ -27,6 +27,9 @@ class Snake
     static const int MOVE_UP = 2;
     static const int MOVE_DOWN = 3;
 
+    static const int DIFFICULTY_BIT = 5;
+    static const int DIFFICULTY_THRESH = 5 * DIFFICULTY_BIT;
+
     // INPUT
     // direction should be one of the MOVE_ variables
     void sendInput(int direction);
@@ -35,8 +38,9 @@ class Snake
     void init();
     void update();
     void render();
-    bool isPlaying() { return playing; }
     void over();
+    bool isPlaying() { return playing; }
+    bool isFinished() { return finished; }
 
     // getter for difficulty
     int getDifficulty() { return difficulty; }
@@ -62,10 +66,12 @@ class Snake
   private:
     // game variables
     bool playing;
+    bool finished;
     int difficulty = 0;
 
-    // food object
+    // food variables
     Food food;
+    int movesUntilRespawn = -1;
 
     // player variables
     Player player[BOARD_SIZE_SQRD];
@@ -86,5 +92,4 @@ class Snake
     // render functions
     void drawFood();
     void drawPlayer();
-    
 };
